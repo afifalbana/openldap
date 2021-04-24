@@ -62,7 +62,7 @@ objectClass: organizationalUnit
 ou: Group
 EOF
 
-sudo ldapadd -x -W -D "$LDAP_USER" -f base.ldif
+sudo ldapadd -x -w $TEMP_PASS -D "$LDAP_USER" -f base.ldif
 }
 
 run_modify_db () {
