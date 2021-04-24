@@ -2,7 +2,7 @@
 
 # Generate password for LDAP admin using slappasswd.
 ldap_password () {
-LDAP_PASS_NEW=$(slappasswd -h {SSHA} -s $LDAP_PASS)
+LDAP_PASS_NEW=$(sudo slappasswd -h {SSHA} -s $LDAP_PASS)
 return LDAP_PASS_SHA
 }
 
@@ -25,7 +25,7 @@ replace: olcRootPW
 olcRootPW: $LDAP_PASS_SHA
 EOF
 
-ldapmodify -Y EXTERNAL  -H ldapi:/// -f olc.ldif
+sudo ldapmodify -Y EXTERNAL  -H ldapi:/// -f olc.ldif
 }
 
 # Modify monitor access only to LDAP admin.
@@ -37,7 +37,7 @@ replace: olcAccess
 olcAccess: {0}to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external, cn=auth" read by dn.base=$LDAP_USER read by * none
 EOF
 
-ldapmodify -Y EXTERNAL  -H ldapi:/// -f monitor.ldif
+sudo ldapmodify -Y EXTERNAL  -H ldapi:/// -f monitor.ldif
 }
 
 # Create base domain, admin user, user base dn, and group base dn. 
@@ -62,7 +62,7 @@ objectClass: organizationalUnit
 ou: Group
 EOF
 
-ldapadd -x -W -D "$LDAP_USER" -f base.ldif
+sudo ldapadd -x -W -D "$LDAP_USER" -f base.ldif
 }
 
 run_modify_db () {
