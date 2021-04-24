@@ -32,7 +32,7 @@ sudo echo "local4.* /var/log/ldap.log" >> /etc/rsyslog.conf
 sudo systemctl restart rsyslog
 
 # Install phpLDAPAdmin from EPEL repository.
-sudo yum -y phpldapadmin
+sudo yum -y install phpldapadmin
 
 # Grant phpLDAPadmin to be access from all network.
 sudo sed -i -e 's/Require local/Require all granted/' /etc/httpd/conf.d/phpldapadmin.conf
