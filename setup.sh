@@ -10,9 +10,9 @@ yum -y update && yum -u upgrade
 
 # Install OpenLDAP-server and dependencies .
 yum -y install openldap \
-		openldap-servers \
+    openldap-servers \
     openldap-clients \
-		openldap-devel
+    openldap-devel
 
 # Start OpenLDAP daemon
 systemctl start slapd
