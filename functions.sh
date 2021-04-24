@@ -8,7 +8,7 @@ LDAP_PASS=$(sudo slappasswd -h {SSHA} -s $TEMP_PASS)
 
 # Modify base domain, admin user, and password.
 modify_olc () {
-cat >> olc.ldif << EOF
+cat > olc.ldif << EOF
 dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcSuffix
@@ -30,7 +30,7 @@ sudo ldapmodify -Y EXTERNAL  -H ldapi:/// -f olc.ldif
 
 # Modify monitor access only to LDAP admin.
 modify_monitor () {
-cat >> monitor.ldif << EOF
+cat > monitor.ldif << EOF
 dn: olcDatabase={1}monitor,cn=config
 changetype: modify
 replace: olcAccess
@@ -42,7 +42,7 @@ sudo ldapmodify -Y EXTERNAL  -H ldapi:/// -f monitor.ldif
 
 # Create base domain, admin user, user base dn, and group base dn. 
 modify_base () {
-cat >> base.ldif << EOF
+cat > base.ldif << EOF
 dn: $LDAP_BASE
 dc: $LDAP_TOPD
 objectClass: top
