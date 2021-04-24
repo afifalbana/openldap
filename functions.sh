@@ -2,8 +2,8 @@
 
 # Generate password for LDAP admin using slappasswd.
 ldap_password () {
-LDAP_PASS_NEW=$(sudo slappasswd -h {SSHA} -s $LDAP_PASS)
-return LDAP_PASS_SHA
+TEMP_PASS=$LDAP_PASS
+LDAP_PASS=$(sudo slappasswd -h {SSHA} -s $TEMP_PASS)
 }
 
 # Modify base domain, admin user, and password.
@@ -22,7 +22,7 @@ olcRootDN: $LDAP_USER
 dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcRootPW
-olcRootPW: $LDAP_PASS_SHA
+olcRootPW: $LDAP_PASS
 EOF
 
 sudo ldapmodify -Y EXTERNAL  -H ldapi:/// -f olc.ldif
