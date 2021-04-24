@@ -12,7 +12,6 @@ yum -y update && yum -u upgrade
 yum -y install openldap \
 		openldap-servers \
     openldap-clients \
-    
 		openldap-devel
 
 # Start OpenLDAP daemon
