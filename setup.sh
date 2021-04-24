@@ -5,10 +5,9 @@
 source variables.sh
 source functions.sh
 
-# Install epel, update and upgrade software packages.
+# Install epel and update software packages.
 sudo yum -y install epel-release
 sudo yum -y update 
-sudo yum -u upgrade
 
 # Install OpenLDAP-server and dependencies .
 sudo yum -y install openldap \
