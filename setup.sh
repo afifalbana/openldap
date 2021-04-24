@@ -41,7 +41,7 @@ sudo systemctl restart httpd
 # Configure phpLDAPAdmin.
 CONF_FILE=/etc/phpldapadmin/config.php
 sudo sed -i -e "s/Local LDAP Server/$LDAP_SERVER_NAME/" $CONF_FILE
-sudo sed -i -e "s/$servers->setValue('login','attr','uid');/\/\/ $servers->setValue('login','attr','uid');" $CONF_FILE
+sudo sed -i -e "s/$servers->setValue('login','attr','uid');/\/\/ $servers->setValue('login','attr','uid');/" $CONF_FILE
 sudo echo "$servers->setValue('server','host','$LDAP_HOST');" >> $CONF_FILE
 sudo echo "$servers->setValue('server','port', $LDAP_PORT);" >> $CONF_FILE
 sudo echo "$servers->setValue('server','base',array('$LDAP_BASE'));" >> $CONF_FILE
